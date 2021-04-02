@@ -1,3 +1,9 @@
+---
+title: mac first met
+date: 2021-01-21
+draft: false
+---
+
 # 听说你买了 Mac
 
 ## 背景

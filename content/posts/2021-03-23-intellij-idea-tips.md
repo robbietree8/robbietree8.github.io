@@ -1,3 +1,9 @@
+---
+title: intellij idea tips
+date: 2021-03-23
+draft: false
+---
+
 # Intellij IDEA tips
 
 IDEA提供了很多提效的工具，比如很多人喜欢的重构菜单，今天我们来了解下其他的工具。

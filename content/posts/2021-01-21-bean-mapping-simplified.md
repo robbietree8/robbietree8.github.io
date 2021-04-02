@@ -1,3 +1,9 @@
+---
+title: bean mapping simplified
+date: 2021-01-21
+draft: false
+---
+
 # Bean mapping simplified
 
 ## 背景

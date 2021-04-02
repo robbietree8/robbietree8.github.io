@@ -1,3 +1,9 @@
+---
+title: influxdb and grafana
+date: 2019-03-15
+draft: false
+---
+
 # InfluxDB & Grafana 趟坑过程记录
 
 

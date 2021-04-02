@@ -1,3 +1,9 @@
+---
+title: spring cloud practice
+date: 2018-07-03
+draft: false
+---
+
 # Spring Cloud整体实践
 
 笔者在最近的工作中用到了`Spring Cloud`微服务整体解决方案，没有使用`SC `的全部组件，只用到了网关(Zuul)，注册中心(Eureka)和配置中心(Config server)，现将方案简要说明如下

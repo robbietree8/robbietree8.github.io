@@ -1,3 +1,9 @@
+---
+title: reading java dns cache manipulator
+date: 2019-01-23
+draft: false
+---
+
 # java-dns-cache-manipulator源码阅读笔记
 
 阅读开源代码[java-dns-cache-manipulator](https://github.com/alibaba/java-dns-cache-manipulator)的一些收益

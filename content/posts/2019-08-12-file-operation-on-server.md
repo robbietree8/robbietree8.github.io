@@ -1,3 +1,9 @@
+---
+title: file operation on server
+date: 2019-08-12
+draft: false
+---
+
 # 服务器文件操作笔记
 
 __数据库备份__

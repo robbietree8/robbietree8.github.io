@@ -1,3 +1,9 @@
+---
+title: influxdb notes
+date: 2019-08-10
+draft: false
+---
+
 # InfluxDB学习笔记
 
 __notice__: 学习笔记针对的版本是`1.7`
