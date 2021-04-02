@@ -25,6 +25,11 @@ summaryLength = 10
       lightTheme = "github-light"
       darkTheme = "github-dark"
 
+  [params.analytics]
+    enable = true
+
+    [params.analytics.yandex]
+      id = "75049342"
 
 [menu]
   [[menu.main]]
