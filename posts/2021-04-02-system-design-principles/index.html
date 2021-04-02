@@ -1,0 +1,152 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>system design principles by example |</title><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content><meta name=twitter:title content="system design principles by example"><meta name=twitter:description content><meta name=Description content><meta property="og:title" content="system design principles by example"><meta property="og:description" content="从todo-cli谈谈一些系统设计的原则 介绍 以实际的需求为切入点，谈谈在系统设计以及实现上哪些原则可以帮助我们更好的实现设计。
+需求来自郑晔老师的代码之丑, 简单讲，就是一个简易的命令行todo应用。
+原则解读 1. 分层设计  类设计图，具体代码可以下拉到参考链接"><meta property="og:type" content="article"><meta property="og:url" content="https://robbietree8.github.io/posts/2021-04-02-system-design-principles/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-02T00:00:00+00:00"><meta property="article:modified_time" content="2021-04-02T00:00:00+00:00"><meta name=application-name content="robbietree's blog"><meta name=apple-mobile-web-app-title content="robbietree's blog"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2021-04-02-system-design-principles/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"system design principles by example","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2021-04-02-system-design-principles\/"},"genre":"posts","wordCount":332,"url":"https:\/\/robbietree8.github.io\/posts\/2021-04-02-system-design-principles\/","datePublished":"2021-04-02T00:00:00+00:00","dateModified":"2021-04-02T00:00:00+00:00","description":""}</script></head><body data-header-desktop data-header-mobile><script>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'dark'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'dark'==='dark')&&document.body.setAttribute('theme','dark')</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="robbietree's blog" class="header-logo logo-svg">robbietree's blog</a></div><div class=menu><nav><ul class=menu-inner><li><a class=menu-item href=/posts/>Posts</a></li><li><a class=menu-item href=/tags/>Tags</a></li><li><a class=menu-item href=/categories/>Categories</a></li></ul></nav><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><span class="svg-icon icon-moon"></span></a></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="robbietree's blog" class=header-logo>robbietree's blog</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><nav><ul><li><a class=menu-item href=/posts/ title>Posts</a></li><li><a class=menu-item href=/tags/ title>Tags</a></li><li><a class=menu-item href=/categories/ title>Categories</a></li></ul></nav><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><span class="svg-icon icon-moon"></span></a></div></div></header><main class=main><div class="container content-article theme-classic"><div class=toc id=toc-auto><div class=toc-title>目录</div><div class=toc-content id=toc-content-auto></div></div><div class=header-post><div class=post-title><div class=post-all-meta><nav class=breadcrumbs><ol><li><a href=/>主页</a></li><li>system design principles by example</li></ol></nav><h1 class="single-title flipInX">system design principles by example</h1><div class=post-meta><div class=post-meta-line><span class=post-meta-date><i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-04-02>2021-04-02</time>
+</span><span class=post-meta-words><i class="svg-icon icon-pencil"></i>约 332 字</span>
+<span class=post-meta-reading><i class="svg-icon icon-stopwatch"></i>预计阅读 2 分钟</span></div></div></div></div></div><article class="single toc-start"><div class="content-block content-block-first content-block-position"><div class=post><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#介绍>介绍</a></li><li><a href=#原则解读>原则解读</a><ul><li><a href=#1-分层设计>1. 分层设计</a></li><li><a href=#2-依赖反转>2. 依赖反转</a></li></ul></li><li><a href=#参考>参考</a></li></ul></nav></div></div><h1 id=从todo-cli谈谈一些系统设计的原则>从todo-cli谈谈一些系统设计的原则</h1><h2 id=介绍>介绍</h2><p>以实际的需求为切入点，谈谈在系统设计以及实现上哪些原则可以帮助我们更好的实现设计。</p><p>需求来自郑晔老师的<a href=https://time.geekbang.org/column/article/325594 target=_blank rel="noopener noreffer">代码之丑</a>, 简单讲，就是一个简易的命令行todo应用。</p><h2 id=原则解读>原则解读</h2><h3 id=1-分层设计>1. 分层设计</h3><blockquote><p>类设计图，具体代码可以下拉到参考链接</p></blockquote><pre><code class=language-plantuml data-lang=plantuml>package domain {
+    class Item {
+        Long itemIndex;
+        String content;
+        ItemStatusEnum status;
+        String username;
+    }
+
+    interface ItemRepository {
+        Long save(Item item);
+
+        Collection&lt;Item&gt; listAllByUser(String username);
+
+        Collection&lt;Item&gt; listAll();
+
+        Long nextIndex(String username);
+
+        Optional&lt;Item&gt; findByIndex(String username, Long index);
+
+        void update(Item item);
+
+        Collection&lt;Item&gt; listUnDone(String username)
+    }
+
+    enum ItemStatus {
+        INIT, DONE
+    }
+}
+
+package command {
+    class AddCommand {
+    }
+
+    class DoneCommand {
+    }
+
+    class ListCommand {
+    }
+}
+
+package infra {
+    class FileItemRepository implements ItemRepository {
+    }
+
+    class DbItemRepository implements ItemRepository {
+    }
+}
+
+class TodoCliCommand {
+    void main();
+}
+
+TodoCliCommand *-- AddCommand
+TodoCliCommand *-- ListCommand
+TodoCliCommand *-- DoneCommand
+
+command -down-&gt; domain
+</code></pre><p>这是目前版本的类设计图，可以看到<code>domain</code>包作为核心功能的承载者，不依赖外部的类，这样做的好处是，外围的一些需求变化，不会导致核心功能的变更。</p><p>但是从具体的实现上来看，还是有一点问题，比如<code>AddCommand</code>的实现。</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=nd>@Command</span><span class=o>(</span><span class=n>name</span> <span class=o>=</span> <span class=s>&#34;add&#34;</span><span class=o>,</span> <span class=n>description</span> <span class=o>=</span> <span class=s>&#34;Add todo item.&#34;</span><span class=o>,</span> <span class=n>mixinStandardHelpOptions</span> <span class=o>=</span> <span class=kc>true</span><span class=o>)</span>
+<span class=kd>public</span> <span class=kd>class</span> <span class=nc>AddCommand</span> <span class=kd>implements</span> <span class=n>Runnable</span> <span class=o>{</span>
+    <span class=nd>@Parameters</span><span class=o>(</span><span class=n>description</span> <span class=o>=</span> <span class=s>&#34;Item content.&#34;</span><span class=o>)</span>
+    <span class=n>String</span> <span class=n>content</span> <span class=o>=</span> <span class=s>&#34;&#34;</span><span class=o>;</span>
+
+    <span class=nd>@Inject</span>
+    <span class=n>ItemRepository</span> <span class=n>itemRepository</span><span class=o>;</span>
+
+    <span class=nd>@Inject</span>
+    <span class=n>SessionRepository</span> <span class=n>sessionRepository</span><span class=o>;</span>
+
+    <span class=nd>@Override</span>
+    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+        <span class=n>String</span> <span class=n>currentUser</span> <span class=o>=</span> <span class=n>sessionRepository</span><span class=o>.</span><span class=na>getCurrentUser</span><span class=o>();</span>
+
+        <span class=n>Long</span> <span class=n>nextIndex</span> <span class=o>=</span> <span class=n>itemRepository</span><span class=o>.</span><span class=na>nextIndex</span><span class=o>(</span><span class=n>currentUser</span><span class=o>);</span>
+
+        <span class=n>Item</span> <span class=n>item</span> <span class=o>=</span> <span class=n>Item</span><span class=o>.</span><span class=na>create</span><span class=o>(</span><span class=n>nextIndex</span><span class=o>,</span> <span class=n>currentUser</span><span class=o>,</span> <span class=n>content</span><span class=o>);</span>
+        <span class=n>itemRepository</span><span class=o>.</span><span class=na>save</span><span class=o>(</span><span class=n>item</span><span class=o>);</span>
+
+        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>printf</span><span class=o>(</span><span class=s>&#34;\n%d. %s\n&#34;</span><span class=o>,</span> <span class=n>nextIndex</span><span class=o>,</span> <span class=n>content</span><span class=o>);</span>
+        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>printf</span><span class=o>(</span><span class=s>&#34;\nItem %d added\n&#34;</span><span class=o>,</span> <span class=n>nextIndex</span><span class=o>);</span>
+    <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>实现上，在<code>command</code>里直接处理了业务逻辑，如果这时候来了一个需求，需要提供rest api供网页端使用，怎么办？显然目前的这种实现是需要加以改造的。</p><p>为此，我引入了<code>domain service</code>，将<code>command</code>里处理的业务逻辑挪到此。</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=nd>@Singleton</span>
+<span class=kd>public</span> <span class=kd>class</span> <span class=nc>AddService</span> <span class=o>{</span>
+    <span class=nd>@Inject</span>
+    <span class=n>ItemRepository</span> <span class=n>itemRepository</span><span class=o>;</span>
+
+    <span class=kd>public</span> <span class=n>Long</span> <span class=nf>add</span><span class=o>(</span><span class=kd>final</span> <span class=n>String</span> <span class=n>username</span><span class=o>,</span> <span class=kd>final</span> <span class=n>String</span> <span class=n>content</span><span class=o>)</span> <span class=o>{</span>
+        <span class=n>Long</span> <span class=n>nextIndex</span> <span class=o>=</span> <span class=n>itemRepository</span><span class=o>.</span><span class=na>nextIndex</span><span class=o>(</span><span class=n>username</span><span class=o>);</span>
+
+        <span class=n>Item</span> <span class=n>item</span> <span class=o>=</span> <span class=n>Item</span><span class=o>.</span><span class=na>create</span><span class=o>(</span><span class=n>nextIndex</span><span class=o>,</span> <span class=n>username</span><span class=o>,</span> <span class=n>content</span><span class=o>);</span>
+        <span class=n>itemRepository</span><span class=o>.</span><span class=na>save</span><span class=o>(</span><span class=n>item</span><span class=o>);</span>
+
+        <span class=k>return</span> <span class=n>nextIndex</span><span class=o>;</span>
+    <span class=o>}</span>
+<span class=o>}</span>
+
+<span class=nd>@Command</span><span class=o>(</span><span class=n>name</span> <span class=o>=</span> <span class=s>&#34;add&#34;</span><span class=o>,</span> <span class=n>description</span> <span class=o>=</span> <span class=s>&#34;Add todo item.&#34;</span><span class=o>,</span> <span class=n>mixinStandardHelpOptions</span> <span class=o>=</span> <span class=kc>true</span><span class=o>)</span>
+<span class=kd>public</span> <span class=kd>class</span> <span class=nc>AddCommand</span> <span class=kd>implements</span> <span class=n>Runnable</span> <span class=o>{</span>
+    <span class=nd>@Parameters</span><span class=o>(</span><span class=n>description</span> <span class=o>=</span> <span class=s>&#34;Item content.&#34;</span><span class=o>)</span>
+    <span class=n>String</span> <span class=n>content</span> <span class=o>=</span> <span class=s>&#34;&#34;</span><span class=o>;</span>
+
+    <span class=nd>@Inject</span>
+    <span class=n>SessionRepository</span> <span class=n>sessionRepository</span><span class=o>;</span>
+
+    <span class=nd>@Inject</span>
+    <span class=n>AddService</span> <span class=n>addService</span><span class=o>;</span>
+
+    <span class=nd>@Override</span>
+    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+        <span class=n>String</span> <span class=n>currentUser</span> <span class=o>=</span> <span class=n>sessionRepository</span><span class=o>.</span><span class=na>getCurrentUser</span><span class=o>();</span>
+
+        <span class=n>addService</span><span class=o>.</span><span class=na>add</span><span class=o>(</span><span class=n>currentUser</span><span class=o>,</span> <span class=n>content</span><span class=o>);</span>
+
+        <span class=n>Long</span> <span class=n>nextIndex</span> <span class=o>=</span> <span class=n>addService</span><span class=o>.</span><span class=na>add</span><span class=o>(</span><span class=n>currentUser</span><span class=o>,</span> <span class=n>content</span><span class=o>);</span>
+
+        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>printf</span><span class=o>(</span><span class=s>&#34;\n%d. %s\n&#34;</span><span class=o>,</span> <span class=n>nextIndex</span><span class=o>,</span> <span class=n>content</span><span class=o>);</span>
+        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>printf</span><span class=o>(</span><span class=s>&#34;\nItem %d added\n&#34;</span><span class=o>,</span> <span class=n>nextIndex</span><span class=o>);</span>
+    <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>如此一来，如果要支持rest api的接口，只需要引入controller包，调用下service即可，不需要改动核心业务逻辑处理的代码。</p><p>详见<a href=https://github.com/robbietree8/todo-cli/pull/3 target=_blank rel="noopener noreffer">pull!3</a></p><p>⚡ <strong>每一行代码要找到属于它的位置</strong></p><h3 id=2-依赖反转>2. 依赖反转</h3><pre><code class=language-plantuml data-lang=plantuml>package domain {
+    class AddService {
+    }
+}
+
+package infra {
+    class FileItemRepository {
+        Long add(Item item);
+    }
+}
+
+AddService -&gt; FileItemRepository
+</code></pre><p>上图的箭头表示的是依赖关系，也就是<code>AddService</code>依赖<code>FileItemRepository</code>，这里存在的问题是，<code>FileItemRepository</code>实际上是对应文件存储的实现方式而已，如果后续换了存储方式，比如换成了数据库，那么就需要修改<code>AddService</code>，也就是需要修改核心的处理业务逻辑的代码。</p><pre><code class=language-plantuml data-lang=plantuml>package domain {
+    class AddService {
+    }
+    interface ItemRepository {
+        Long add(Item item);
+    }
+}
+
+package infra {
+    class FileItemRepository implements ItemRepository {
+        Long add(Item item);
+    }
+}
+
+AddService -&gt; ItemRepository
+</code></pre><p>为此，引入了<code>ItemRepository</code>接口，<code>AddService</code>依赖这个接口，包含具体实现的<code>FileItemRepository</code>也依赖于这个接口，从依赖方向上看，对比前图，方向是反转了。</p><p>这么做的好处是，假设后续要支持数据库存储，只需要实现<code>ItemRepository</code>接口，在编译时或运行时决定<code>ItemRepository</code>的具体实现是哪个类即可，核心业务处理逻辑不需要改动。</p><p>⚡ <strong>高层策略不应该依赖低层细节</strong></p><h2 id=参考>参考</h2><ul><li><a href=https://github.com/robbietree8/todo-cli target=_blank rel="noopener noreffer">实现todo cli的代码仓库</a></li><li><a href=https://martinfowler.com/articles/dipInTheWild.html target=_blank rel="noopener noreffer">dipInTheWild</a></li></ul></div><div class=post style=padding-top:0><div class=post-share></div></div></div><div id=toc-final></div></article><div class="page single comments content-block-position"><div id=comments><div id=utterances></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.</noscript></div></div></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.82.0">Hugo</a> 强力驱动 | 主题 - <a href="https://ublogger.netlify.app/?utm_source=https://robbietree8.github.io/&utm_medium=footer&utm_campaign=config&utm_term=2.0.1" target=_blank title="uBlogger 2.0.1">uBlogger</a></div><div class=footer-line><i class="svg-icon icon-copyright"></i><span>2021</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="svg-icon icon-arrow-up"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="svg-icon icon-comments-fixed"></i></a></div><script src=/lib/smooth-scroll/smooth-scroll.min.js></script><script src=/lib/clipboard/clipboard.min.js></script><script>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"robbietree8/blog-comments"}}}</script><script src=/js/theme.min.js></script><script>(function(a,e,f,g,b,c,d){a[b]=a[b]||function(){(a[b].a=a[b].a||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym"),ym("75049342","init",{clickmap:!0,trackLinks:!0,accurateTrackBounce:!0,webvisor:null})</script><noscript><div><img src=https://mc.yandex.ru/watch/75049342 style=position:absolute;left:-9999px alt></div></noscript></body></html>
