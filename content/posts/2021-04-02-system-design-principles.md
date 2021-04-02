@@ -19,7 +19,7 @@ draft: false
 
 > 类设计图，具体代码可以下拉到参考链接
 
-![class diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/robbietree8/robbietree8.github.io/master/assets/2021-04-02/classDisgram.puml)
+![class diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2021-04-02/classDiagram.puml)
 
 
 这是目前版本的类设计图，可以看到`domain`包作为核心功能的承载者，不依赖外部的类，这样做的好处是，外围的一些需求变化，不会导致核心功能的变更。
