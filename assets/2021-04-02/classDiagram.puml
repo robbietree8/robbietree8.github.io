@@ -1,0 +1,59 @@
+@startuml class diagram
+package domain {
+    class Item {
+        Long itemIndex;
+        String content;
+        ItemStatusEnum status;
+        String username;
+    }
+
+    interface ItemRepository {
+        Long save(Item item);
+
+        Collection<Item> listAllByUser(String username);
+
+        Collection<Item> listAll();
+
+        Long nextIndex(String username);
+
+        Optional<Item> findByIndex(String username, Long index);
+
+        void update(Item item);
+
+        Collection<Item> listUnDone(String username)
+    }
+
+    enum ItemStatus {
+        INIT, DONE
+    }
+}
+
+package command {
+    class AddCommand {
+    }
+
+    class DoneCommand {
+    }
+
+    class ListCommand {
+    }
+}
+
+package infra {
+    class FileItemRepository implements ItemRepository {
+    }
+
+    class DbItemRepository implements ItemRepository {
+    }
+}
+
+class TodoCliCommand {
+    void main();
+}
+
+TodoCliCommand *-- AddCommand
+TodoCliCommand *-- ListCommand
+TodoCliCommand *-- DoneCommand
+
+command -down-> domain
+@enduml

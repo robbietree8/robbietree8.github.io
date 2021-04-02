@@ -19,65 +19,8 @@ draft: false
 
 > 类设计图，具体代码可以下拉到参考链接
 
-```plantuml
-package domain {
-    class Item {
-        Long itemIndex;
-        String content;
-        ItemStatusEnum status;
-        String username;
-    }
+![class diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/robbietree8/robbietree8.github.io/master/assets/2021-04-02/classDisgram.puml)
 
-    interface ItemRepository {
-        Long save(Item item);
-
-        Collection<Item> listAllByUser(String username);
-
-        Collection<Item> listAll();
-
-        Long nextIndex(String username);
-
-        Optional<Item> findByIndex(String username, Long index);
-
-        void update(Item item);
-
-        Collection<Item> listUnDone(String username)
-    }
-
-    enum ItemStatus {
-        INIT, DONE
-    }
-}
-
-package command {
-    class AddCommand {
-    }
-
-    class DoneCommand {
-    }
-
-    class ListCommand {
-    }
-}
-
-package infra {
-    class FileItemRepository implements ItemRepository {
-    }
-
-    class DbItemRepository implements ItemRepository {
-    }
-}
-
-class TodoCliCommand {
-    void main();
-}
-
-TodoCliCommand *-- AddCommand
-TodoCliCommand *-- ListCommand
-TodoCliCommand *-- DoneCommand
-
-command -down-> domain
-```
 
 这是目前版本的类设计图，可以看到`domain`包作为核心功能的承载者，不依赖外部的类，这样做的好处是，外围的一些需求变化，不会导致核心功能的变更。
 
