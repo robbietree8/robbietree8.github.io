@@ -1,0 +1,14 @@
+@startuml ioc-1
+package domain {
+    class AddService {
+    }
+}
+
+package infra {
+    class FileItemRepository {
+        Long add(Item item);
+    }
+}
+
+AddService -> FileItemRepository
+@enduml

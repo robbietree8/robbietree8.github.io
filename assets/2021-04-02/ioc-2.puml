@@ -1,0 +1,17 @@
+@startuml ioc-2
+package domain {
+    class AddService {
+    }
+    interface ItemRepository {
+        Long add(Item item);
+    }
+}
+
+package infra {
+    class FileItemRepository implements ItemRepository {
+        Long add(Item item);
+    }
+}
+
+AddService -> ItemRepository
+@enduml

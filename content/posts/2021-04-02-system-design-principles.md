@@ -17,7 +17,7 @@ draft: false
 
 ### 1. 分层设计
 
-> 类设计图，具体代码可以下拉到参考链接
+__类设计图，具体代码可以下拉到参考链接__
 
 ![class diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2021-04-02/classDiagram.puml)
 
@@ -107,41 +107,14 @@ public class AddCommand implements Runnable {
 
 ### 2. 依赖反转
 
-```plantuml
-package domain {
-    class AddService {
-    }
-}
+![ioc-1](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2021-04-02/ioc-1.puml)
 
-package infra {
-    class FileItemRepository {
-        Long add(Item item);
-    }
-}
-
-AddService -> FileItemRepository
-```
 
 上图的箭头表示的是依赖关系，也就是`AddService`依赖`FileItemRepository`，这里存在的问题是，`FileItemRepository`实际上是对应文件存储的实现方式而已，如果后续换了存储方式，比如换成了数据库，那么就需要修改`AddService`，也就是需要修改核心的处理业务逻辑的代码。
 
 
-```plantuml
-package domain {
-    class AddService {
-    }
-    interface ItemRepository {
-        Long add(Item item);
-    }
-}
+![ioc-1](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2021-04-02/ioc-2.puml)
 
-package infra {
-    class FileItemRepository implements ItemRepository {
-        Long add(Item item);
-    }
-}
-
-AddService -> ItemRepository
-```
 
 为此，引入了`ItemRepository`接口，`AddService`依赖这个接口，包含具体实现的`FileItemRepository`也依赖于这个接口，从依赖方向上看，对比前图，方向是反转了。
 
