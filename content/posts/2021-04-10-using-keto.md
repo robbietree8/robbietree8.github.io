@@ -26,10 +26,12 @@ $ keto help
 
 权限描述的是: `谁`对`资源`拥有什么`操作`
 
+假设有这么一个权限描述
+
 ```
 alice can create articles
 anyone can view any articles
-only owner can edit own's articles
+only owner can edit his articles
 ```
 
 __青铜实现__
@@ -98,7 +100,7 @@ let pis = select permissionId from subject_permission_rel where subjectId =~ 'al
 (permissions in pis).anyMatch(p -> p.action = 'POST' && p.resource =~ '/articles')
 ```
 
-Q2: is alice able to edit article #1
+Q2: is alice able to edit article 1.md
 
 ```
 let pis = select permissionId from subject_permission_rel where subjectId =~ 'alice|*'
@@ -153,7 +155,8 @@ Q1: is alice able to create articles
 keto check alice owner articles /articles/1.md
 ```
 
-Q2: is alice able to edit article
+Q2: is alice able to edit article 1.md
+
 ```
 keto check alice writer articles /articles
 ```

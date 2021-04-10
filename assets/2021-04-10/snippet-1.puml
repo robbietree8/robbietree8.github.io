@@ -2,5 +2,5 @@
 storage Subject as S
 storage Resource as R
 
-S "*"--"*" R : operation
+S "*"--"*" R : Operation
 @enduml
