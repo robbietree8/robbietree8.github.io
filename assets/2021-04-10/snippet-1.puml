@@ -1,0 +1,6 @@
+@startuml snippet-1
+storage Subject as S
+storage Resource as R
+
+S "*"--"*" R : operation
+@enduml
