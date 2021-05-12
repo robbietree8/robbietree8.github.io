@@ -1,0 +1,9 @@
+@startuml snippet-3
+participant Browser as B
+participant Server as S
+
+B -> B : 浏览器地址指向微信的OAuth地址
+B -> B : 展示微信的授权页面
+B -> B : 用户点击授权后，会跳转回指定的回跳地址
+B -> S : 传入微信返回的code，\n服务器根据code可以拿到用户信息，如openid等\n此时服务器可以向浏览器种cookie，\n这样后续的请求就能定位到目标用户
+@enduml

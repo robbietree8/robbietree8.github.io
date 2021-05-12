@@ -1,0 +1,7 @@
+@startuml snippet-2
+participant Wechat as W
+participant Server as S
+
+W -> S : 用户点击关注后，\n微信服务端会向配置的接口推送消息
+S --> W : 服务端处理消息后，可以回复消息，这个消息会推送给用户
+@enduml

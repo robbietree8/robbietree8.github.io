@@ -1,0 +1,7 @@
+@startuml snippet-1
+participant Wechat as W
+participant Server as S
+
+W -> S : 微信调用服务接口检查服务器URL是否有效
+S --> W : 原样返回echostr即可成功接入
+@enduml
