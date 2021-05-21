@@ -2,6 +2,7 @@
 title: bean mapping simplified
 date: 2021-01-21
 draft: false
+tags: ["craftsman"]
 ---
 
 # Bean mapping simplified

@@ -2,6 +2,7 @@
 title: clean coder
 date: 2018-08-18
 draft: false
+tags: ["professional"]
 ---
 
 # 代码整洁之道-程序员的职业素养书摘

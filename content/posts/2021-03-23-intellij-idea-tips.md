@@ -2,6 +2,7 @@
 title: intellij idea tips
 date: 2021-03-23
 draft: false
+tags: ["craftsman"]
 ---
 
 # Intellij IDEA tips

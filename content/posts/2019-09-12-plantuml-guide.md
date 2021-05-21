@@ -2,6 +2,7 @@
 title: plantuml guide
 date: 2019-09-12
 draft: false
+tags: ["craftsman"]
 ---
 
 # 文本绘图利器plantuml

@@ -2,6 +2,7 @@
 title: spring cloud practice
 date: 2018-07-03
 draft: false
+tags: ["professional"]
 ---
 
 # Spring Cloud整体实践

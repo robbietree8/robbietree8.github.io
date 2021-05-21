@@ -2,6 +2,7 @@
 title: using jmap in docker
 date: 2018-11-06
 draft: false
+tags: ["craftsman"]
 ---
 
 # Docker里如何使用jmap

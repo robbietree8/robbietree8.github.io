@@ -2,6 +2,7 @@
 title: how to create a awesome gitlab project
 date: 2019-08-09
 draft: false
+tags: ["professional"]
 ---
 
 # 如何创建一个高质量高逼格的Gitlab工程项目

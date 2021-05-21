@@ -2,6 +2,7 @@
 title: using spock by example
 date: 2021-04-04
 draft: false
+tags: ["craftsman"]
 ---
 
 # Using Spock

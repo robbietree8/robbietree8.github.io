@@ -2,6 +2,7 @@
 title: influxdb notes
 date: 2019-08-10
 draft: false
+tags: ["craftsman"]
 ---
 
 # InfluxDB学习笔记

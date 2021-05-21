@@ -2,6 +2,7 @@
 title: mac first met
 date: 2021-01-21
 draft: false
+tags: ["craftsman"]
 ---
 
 # 听说你买了 Mac

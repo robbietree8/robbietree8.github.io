@@ -2,6 +2,7 @@
 title: file operation on server
 date: 2019-08-12
 draft: false
+tags: ["craftsman"]
 ---
 
 # 服务器文件操作笔记
