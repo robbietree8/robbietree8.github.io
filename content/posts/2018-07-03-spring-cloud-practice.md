@@ -22,7 +22,7 @@ tags: ["professional"]
 使用的zuul的版本还是1.x，配置方面只要遵循官方的例子就行，没有什么难点，几点可以关注的
 
 1. 将路由规则放到`config`里配置，这样当路由规则变化的时候，只需要更新`config`就行，网关不需要重新发布
-2. 1.x的版本没有自带限流器，需要配合第三方的限流器，目前笔者使用的是`spring-cloud-zuul-ratelimit`，使用下来没什么问题，并且[github](https://github.com/marcosbarbero/spring-cloud-zuul-ratelimit)的维护度比较高
+2. 1.x的版本没有自带限流器，需要配合第三方的限流器，目前笔者使用的是`spring-cloud-zuul-ratelimit`，使用下来没什么问题，并且[github](https://github.com/marcosbarbero/spring-cloud-zuul-ratelimit)的活跃度比较高
 
 ## 注册中心层
 
