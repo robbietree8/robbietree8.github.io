@@ -1,24 +1,23 @@
 <!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>微信公众号开发记录 | </title><meta name=twitter:card content="summary_large_image">
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>swagger behind proxy | </title><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content>
-<meta name=twitter:title content="微信公众号开发记录">
-<meta name=twitter:description content><meta name=Description content><meta property="og:title" content="微信公众号开发记录">
-<meta property="og:description" content="微信公众号开发记录 核心流程 微信端配置接口
- 参考 me.chanjar.weixin.mp.api.WxMpService#checkSignature
-接收微信推送消息
- 参考 me.chanjar.weixin.mp.api.WxMpMessageRouter">
+<meta name=twitter:title content="swagger behind proxy">
+<meta name=twitter:description content><meta name=Description content><meta property="og:title" content="swagger behind proxy">
+<meta property="og:description" content="swagger behind proxy 出发点 在某些情况下，我们的后端服务是隐藏在网关后面，网关通过路径路由到具体的后端服务，比如/abc/ -> http://backend:8080
+这会导致访问swagger端点的时候，路径带不过去，进而通过swagger访问不到后端
+如何解决  配置ui地址  springdoc.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://robbietree8.github.io/posts/2021-05-12-woa/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-05-12T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-05-12T00:00:00+00:00">
+<meta property="og:url" content="https://robbietree8.github.io/posts/2021-12-06-openapi-under-proxy/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-12-06T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-12-06T00:00:00+00:00">
 <meta name=application-name content="robbietree's blog">
 <meta name=apple-mobile-web-app-title content="robbietree's blog"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
 <link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png>
-<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2021-05-12-woa/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"微信公众号开发记录","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2021-05-12-woa\/"},"genre":"posts","keywords":"playground","wordCount":22,"url":"https:\/\/robbietree8.github.io\/posts\/2021-05-12-woa\/","datePublished":"2021-05-12T00:00:00+00:00","dateModified":"2021-05-12T00:00:00+00:00","description":""}</script></head>
+<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2021-12-06-openapi-under-proxy/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"swagger behind proxy","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2021-12-06-openapi-under-proxy\/"},"genre":"posts","keywords":"craftsman","wordCount":17,"url":"https:\/\/robbietree8.github.io\/posts\/2021-12-06-openapi-under-proxy\/","datePublished":"2021-12-06T00:00:00+00:00","dateModified":"2021-12-06T00:00:00+00:00","description":""}</script></head>
 <body data-header-desktop data-header-mobile><script>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -72,14 +71,14 @@
 <div class=post-all-meta>
 <nav class=breadcrumbs>
 <ol>
-<li><a href=/>主页 </a></li><li>微信公众号开发记录</li>
+<li><a href=/>主页 </a></li><li>swagger behind proxy</li>
 </ol>
 </nav>
-<h1 class="single-title flipInX">微信公众号开发记录</h1><div class=post-meta>
+<h1 class="single-title flipInX">swagger behind proxy</h1><div class=post-meta>
 <div class=post-meta-line><span class=post-meta-date>
-<i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-05-12>2021-05-12</time>
+<i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-12-06>2021-12-06</time>
 </span><span class=post-meta-words>
-<i class="svg-icon icon-pencil"></i>约 22 字
+<i class="svg-icon icon-pencil"></i>约 17 字
 </span>
 <span class=post-meta-reading>
 <i class="svg-icon icon-stopwatch"></i>预计阅读 1 分钟
@@ -97,46 +96,33 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#核心流程>核心流程</a></li>
-<li><a href=#测试调试>测试&调试</a></li>
-<li><a href=#踩坑记录>踩坑记录</a></li>
+<li><a href=#出发点>出发点</a></li>
+<li><a href=#如何解决>如何解决</a></li>
 <li><a href=#参考>参考</a></li>
 </ul>
 </nav></div>
-</div><h1 id=微信公众号开发记录>微信公众号开发记录</h1>
-<h2 id=核心流程>核心流程</h2>
-<p><strong>微信端配置接口</strong></p>
-<p>
-<img loading=lazy decoding=async src="http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2021-05-12/snippet-1.puml" alt=diagram-1 title=snippet-1.puml></p>
-<p>参考 <code>me.chanjar.weixin.mp.api.WxMpService#checkSignature</code></p>
-<p><strong>接收微信推送消息</strong></p>
-<p>
-<img loading=lazy decoding=async src="http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2021-05-12/snippet-2.puml" alt=diagram-2 title=snippet-2.puml></p>
-<p>参考 <code>me.chanjar.weixin.mp.api.WxMpMessageRouter</code></p>
-<p><strong>code换session</strong></p>
-<p>
-<img loading=lazy decoding=async src="http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2021-05-12/snippet-3.puml" alt=diagram-3 title=snippet-3.puml></p>
-<p>参考<code>me.chanjar.weixin.mp.api.WxMpService#getOAuth2Service().getAccessToken(code)</code></p>
-<h2 id=测试调试>测试&调试</h2>
-<p>由于公众号的诸多限制，开发过程中可以使用测试号。</p>
-<p>由于微信服务端需要定位到你的服务器地址，故需要一个外网的地址，这里推荐<code>ngrok</code>，分钟级别即可搭建服务端和微信端的联调环境</p>
-<h2 id=踩坑记录>踩坑记录</h2>
-<p><strong>H5拉起小程序</strong></p>
+</div><h1 id=swagger-behind-proxy>swagger behind proxy</h1>
+<h2 id=出发点>出发点</h2>
+<p>在某些情况下，我们的后端服务是隐藏在网关后面，网关通过路径路由到具体的后端服务，比如<code>/abc/</code> -> <code>http://backend:8080</code></p>
+<p>这会导致访问<code>swagger</code>端点的时候，路径带不过去，进而通过<code>swagger</code>访问不到后端</p>
+<h2 id=如何解决>如何解决</h2>
 <ol>
-<li>绑定JS接口安全域名</li>
-<li>通过config接口注入权限验证配置的时候，需要将当前页面的地址作为参数，用来生成<code>jsapiSignature</code>，否则，你永远不知道为什么小程序的按钮一直显示不出来</li>
+<li>配置<code>ui</code>地址</li>
 </ol>
-<h2 id=参考>参考</h2>
+<pre tabindex=0><code>springdoc.swagger-ui.config-url=${contextPath}/v3/api-docs/swagger-config
+springdoc.swagger-ui.url=${contextPath}/v3/api-docs
+</code></pre><ol start=2>
+<li>增加<code>server</code>配置，详情见参考#1</li>
+</ol>
+<pre tabindex=0><code>server.forward-headers-strategy=framework
+</code></pre><h2 id=参考>参考</h2>
 <ul>
-<li><a href="https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index" target=_blank rel="noopener noreffer">微信测试号</a></li>
-<li><a href=https://github.com/Wechat-Group/WxJava target=_blank rel="noopener noreffer">WxJava</a></li>
-<li><a href=https://ngrok.com/ target=_blank rel="noopener noreffer">ngrok</a></li>
-<li><a href=https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_Open_Tag.html target=_blank rel="noopener noreffer">微信开放标签说明</a></li>
+<li><a href=https://springdoc.org/faq.html#how-can-i-deploy-springdoc-openapi-ui-behind-a-reverse-proxy target=_blank rel="noopener noreffer">offical springdoc</a></li>
 </ul>
 </div>
 <div class=post style=padding-top:0>
 <div class=post-share></div>
-<div class=post-tags><a href=/tags/playground/ class=tag>playground</a></div></div>
+<div class=post-tags><a href=/tags/craftsman/ class=tag>craftsman</a></div></div>
 </div>
 <div id=toc-final></div>
 </article><div class="page single comments content-block-position"><div id=comments><div id=utterances></div><noscript>
