@@ -17,3 +17,4 @@ k8s上如何配置: `nginx-configuration`,`ssl-protocols`里配置成`TLSv1.2 TL
 ## 参考
 
 - [微信-服务器域名配置](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html#1.%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE)
+- [k8s-tls](https://kubernetes.github.io/ingress-nginx/user-guide/tls/)
