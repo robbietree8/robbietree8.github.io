@@ -17,7 +17,7 @@ k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
 <link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png>
-<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2021-12-29-wechat-tls/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"微信后端服务TLS设置","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2021-12-29-wechat-tls\/"},"genre":"posts","keywords":"tips","wordCount":12,"url":"https:\/\/robbietree8.github.io\/posts\/2021-12-29-wechat-tls\/","datePublished":"2021-12-29T00:00:00+00:00","dateModified":"2021-12-29T00:00:00+00:00","description":""}</script></head>
+<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2021-12-29-wechat-tls/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"微信后端服务TLS设置","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2021-12-29-wechat-tls\/"},"genre":"posts","keywords":"tips","wordCount":13,"url":"https:\/\/robbietree8.github.io\/posts\/2021-12-29-wechat-tls\/","datePublished":"2021-12-29T00:00:00+00:00","dateModified":"2021-12-29T00:00:00+00:00","description":""}</script></head>
 <body data-header-desktop data-header-mobile><script>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -78,7 +78,7 @@ k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
 <div class=post-meta-line><span class=post-meta-date>
 <i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-12-29>2021-12-29</time>
 </span><span class=post-meta-words>
-<i class="svg-icon icon-pencil"></i>约 12 字
+<i class="svg-icon icon-pencil"></i>约 13 字
 </span>
 <span class=post-meta-reading>
 <i class="svg-icon icon-stopwatch"></i>预计阅读 1 分钟
@@ -106,6 +106,7 @@ k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
 <h2 id=参考>参考</h2>
 <ul>
 <li><a href=https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html#1.%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE target=_blank rel="noopener noreffer">微信-服务器域名配置</a></li>
+<li><a href=https://kubernetes.github.io/ingress-nginx/user-guide/tls/ target=_blank rel="noopener noreffer">k8s-tls</a></li>
 </ul>
 </div>
 <div class=post style=padding-top:0>
