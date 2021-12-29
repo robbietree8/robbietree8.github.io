@@ -1,6 +1,6 @@
 <!doctype html><html lang=en>
 <head>
-<meta name=generator content="Hugo 0.89.4">
+<meta name=generator content="Hugo 0.91.2">
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>robbietree's blog</title>
 <meta name=twitter:card content="summary_large_image"><meta name=twitter:title content>
@@ -63,6 +63,13 @@
 <div class=container><div class="page home" data-home=posts><div class=home-profile><div class=home-meta></div>
 </div>
 <article class="summary summary-animation" itemscope itemtype=http://schema.org/Article style=margin-bottom:0><div class=article-text><h2 class=summary-title itemprop="name headline">
+<a href=/posts/2021-12-29-wechat-tls/ target=_blank>微信后端服务TLS设置</a>
+</h2><div class="post-meta summary-post-meta"><span class=post-publish><i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-12-29>2021-12-29</time></span></div><div class="content summary-content">微信后端服务TLS设置 微信对后台服务器的要求是TLS 必须支持 1.2 及以上版本
+k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
+如何验证: 可在myssl网站上检查支持的协议版本。</div></div>
+</article>
+<div class=post-tags-summary-under-footer><div class=post-tags-summary-under-footer-display><a class=post-tag-summary href=/tags/tips/>tips</a></div></div>
+<article class="summary summary-animation" itemscope itemtype=http://schema.org/Article style=margin-bottom:0><div class=article-text><h2 class=summary-title itemprop="name headline">
 <a href=/posts/2021-12-06-openapi-under-proxy/ target=_blank>swagger behind proxy</a>
 </h2><div class="post-meta summary-post-meta"><span class=post-publish><i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-12-06>2021-12-06</time></span></div><div class="content summary-content">swagger behind proxy 出发点 在某些情况下，我们的后端服务是隐藏在网关后面，网关通过路径路由到具体的后端服务，比如/abc/ -> http://backend:8080
 这会导致访问swagger端点的时候，路径带不过去，进而通过swagger访问不到后端
@@ -122,12 +129,6 @@ Live Template 这个代码模版工具可以让你在IDE里配置常用的代码
 以顾客到餐馆用餐为例，需要经历顾客来餐厅吃饭，点菜，服务员下单，厨师出菜，服务员上菜，顾客结账的过程，下面我们来看怎么画这些图。</div></div>
 </article>
 <div class=post-tags-summary-under-footer><div class=post-tags-summary-under-footer-display><a class=post-tag-summary href=/tags/craftsman/>craftsman</a></div></div>
-<article class="summary summary-animation" itemscope itemtype=http://schema.org/Article style=margin-bottom:0><div class=article-text><h2 class=summary-title itemprop="name headline">
-<a href=/posts/2019-08-12-file-operation-on-server/ target=_blank>file operation on server</a>
-</h2><div class="post-meta summary-post-meta"><span class=post-publish><i class="svg-icon icon-clock"></i><time class=timeago datetime=2019-08-12>2019-08-12</time></span></div><div class="content summary-content">服务器文件操作笔记 数据库备份
-mysqldump -uroot -p -hlocalhost -P3306 db > /var/lib/mysql/db.sql 数据库恢复</div></div>
-</article>
-<div class=post-tags-summary-under-footer><div class=post-tags-summary-under-footer-display><a class=post-tag-summary href=/tags/craftsman/>craftsman</a></div></div>
 <ul class=pagination><li class="page-item active">
 <span class=page-link>
 <a href=/>1</a>
@@ -138,7 +139,7 @@ mysqldump -uroot -p -hlocalhost -P3306 db > /var/lib/mysql/db.sql 数据库恢�
 </span>
 </li></ul></div></div>
 </main><footer class=footer>
-<div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.89.4">Hugo</a> 强力驱动 | 主题 - <a href="https://ublogger.netlify.app/?utm_source=https://robbietree8.github.io/&utm_medium=footer&utm_campaign=config&utm_term=2.0.1" target=_blank title="uBlogger 2.0.1">uBlogger</a>
+<div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动 | 主题 - <a href="https://ublogger.netlify.app/?utm_source=https://robbietree8.github.io/&utm_medium=footer&utm_campaign=config&utm_term=2.0.1" target=_blank title="uBlogger 2.0.1">uBlogger</a>
 </div><div class=footer-line><i class="svg-icon icon-copyright"></i><span>2021</span></div>
 </div>
 </footer></div>

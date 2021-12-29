@@ -1,23 +1,23 @@
 <!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>swagger behind proxy | </title><meta name=twitter:card content="summary_large_image">
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>微信后端服务TLS设置 | </title><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content>
-<meta name=twitter:title content="swagger behind proxy">
-<meta name=twitter:description content><meta name=Description content><meta property="og:title" content="swagger behind proxy">
-<meta property="og:description" content="swagger behind proxy 出发点 在某些情况下，我们的后端服务是隐藏在网关后面，网关通过路径路由到具体的后端服务，比如/abc/ -> http://backend:8080
-这会导致访问swagger端点的时候，路径带不过去，进而通过swagger访问不到后端
-如何解决  配置ui地址  springdoc.">
+<meta name=twitter:title content="微信后端服务TLS设置">
+<meta name=twitter:description content><meta name=Description content><meta property="og:title" content="微信后端服务TLS设置">
+<meta property="og:description" content="微信后端服务TLS设置 微信对后台服务器的要求是TLS 必须支持 1.2 及以上版本
+k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
+如何验证: 可在myssl网站上检查支持的协议版本。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://robbietree8.github.io/posts/2021-12-06-openapi-under-proxy/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-12-06T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-12-06T00:00:00+00:00">
+<meta property="og:url" content="https://robbietree8.github.io/posts/2021-12-29-wechat-tls/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-12-29T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-12-29T00:00:00+00:00">
 <meta name=application-name content="robbietree's blog">
 <meta name=apple-mobile-web-app-title content="robbietree's blog"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
 <link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png>
-<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2021-12-06-openapi-under-proxy/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"swagger behind proxy","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2021-12-06-openapi-under-proxy\/"},"genre":"posts","keywords":"craftsman","wordCount":17,"url":"https:\/\/robbietree8.github.io\/posts\/2021-12-06-openapi-under-proxy\/","datePublished":"2021-12-06T00:00:00+00:00","dateModified":"2021-12-06T00:00:00+00:00","description":""}</script></head>
+<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2021-12-29-wechat-tls/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"微信后端服务TLS设置","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2021-12-29-wechat-tls\/"},"genre":"posts","keywords":"tips","wordCount":12,"url":"https:\/\/robbietree8.github.io\/posts\/2021-12-29-wechat-tls\/","datePublished":"2021-12-29T00:00:00+00:00","dateModified":"2021-12-29T00:00:00+00:00","description":""}</script></head>
 <body data-header-desktop data-header-mobile><script>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -71,14 +71,14 @@
 <div class=post-all-meta>
 <nav class=breadcrumbs>
 <ol>
-<li><a href=/>主页 </a></li><li>swagger behind proxy</li>
+<li><a href=/>主页 </a></li><li>微信后端服务TLS设置</li>
 </ol>
 </nav>
-<h1 class="single-title flipInX">swagger behind proxy</h1><div class=post-meta>
+<h1 class="single-title flipInX">微信后端服务TLS设置</h1><div class=post-meta>
 <div class=post-meta-line><span class=post-meta-date>
-<i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-12-06>2021-12-06</time>
+<i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-12-29>2021-12-29</time>
 </span><span class=post-meta-words>
-<i class="svg-icon icon-pencil"></i>约 17 字
+<i class="svg-icon icon-pencil"></i>约 12 字
 </span>
 <span class=post-meta-reading>
 <i class="svg-icon icon-stopwatch"></i>预计阅读 1 分钟
@@ -96,33 +96,21 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#出发点>出发点</a></li>
-<li><a href=#如何解决>如何解决</a></li>
 <li><a href=#参考>参考</a></li>
 </ul>
 </nav></div>
-</div><h1 id=swagger-behind-proxy>swagger behind proxy</h1>
-<h2 id=出发点>出发点</h2>
-<p>在某些情况下，我们的后端服务是隐藏在网关后面，网关通过路径路由到具体的后端服务，比如<code>/abc/</code> -> <code>http://backend:8080</code></p>
-<p>这会导致访问<code>swagger</code>端点的时候，路径带不过去，进而通过<code>swagger</code>访问不到后端</p>
-<h2 id=如何解决>如何解决</h2>
-<ol>
-<li>配置<code>ui</code>地址</li>
-</ol>
-<pre tabindex=0><code>springdoc.swagger-ui.config-url=${contextPath}/v3/api-docs/swagger-config
-springdoc.swagger-ui.url=${contextPath}/v3/api-docs
-</code></pre><ol start=2>
-<li>增加<code>server</code>配置，详情见参考#1</li>
-</ol>
-<pre tabindex=0><code>server.forward-headers-strategy=framework
-</code></pre><h2 id=参考>参考</h2>
+</div><h1 id=微信后端服务tls设置>微信后端服务TLS设置</h1>
+<p>微信对后台服务器的要求是<code>TLS 必须支持 1.2 及以上版本</code></p>
+<p>k8s上如何配置: <code>nginx-configuration</code>,<code>ssl-protocols</code>里配置成<code>TLSv1.2 TLSv1.3</code></p>
+<p>如何验证: 可在<a href=https://myssl.com/ target=_blank rel="noopener noreffer">myssl</a>网站上检查支持的协议版本。</p>
+<h2 id=参考>参考</h2>
 <ul>
-<li><a href=https://springdoc.org/faq.html#how-can-i-deploy-springdoc-openapi-ui-behind-a-reverse-proxy target=_blank rel="noopener noreffer">offical springdoc</a></li>
+<li><a href=https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html#1.%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE target=_blank rel="noopener noreffer">微信-服务器域名配置</a></li>
 </ul>
 </div>
 <div class=post style=padding-top:0>
 <div class=post-share></div>
-<div class=post-tags><a href=/tags/craftsman/ class=tag>craftsman</a></div></div>
+<div class=post-tags><a href=/tags/tips/ class=tag>tips</a></div></div>
 </div>
 <div id=toc-final></div>
 </article><div class="page single comments content-block-position"><div id=comments><div id=utterances></div><noscript>
