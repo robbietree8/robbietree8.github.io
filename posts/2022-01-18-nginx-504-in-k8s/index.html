@@ -1,23 +1,23 @@
 <!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>微信后端服务TLS设置 | </title><meta name=twitter:card content="summary_large_image">
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>nginx 504 | </title><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content>
-<meta name=twitter:title content="微信后端服务TLS设置">
-<meta name=twitter:description content><meta name=Description content><meta property="og:title" content="微信后端服务TLS设置">
-<meta property="og:description" content="微信后端服务TLS设置 微信对后台服务器的要求是TLS 必须支持 1.2 及以上版本
-k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
-如何验证: 可在myssl网站上检查支持的协议版本。">
+<meta name=twitter:title content="nginx 504">
+<meta name=twitter:description content><meta name=Description content><meta property="og:title" content="nginx 504">
+<meta property="og:description" content="nginx 504 后端由nginx代理，处理时长超过60秒的时候，nginx侧报504错误，后修改nginx配置后，运行正常。
+关键配置是
+nginx.ingress.kubernetes.io/proxy-send-timeout nginx.ingress.kubernetes.io/proxy-read-timeout 参考  k8s-custom-timeouts  ">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://robbietree8.github.io/posts/2021-12-29-wechat-tls/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-12-29T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-12-29T00:00:00+00:00">
+<meta property="og:url" content="https://robbietree8.github.io/posts/2022-01-18-nginx-504-in-k8s/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-18T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-01-18T00:00:00+00:00">
 <meta name=application-name content="robbietree's blog">
 <meta name=apple-mobile-web-app-title content="robbietree's blog"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
 <link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png>
-<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2021-12-29-wechat-tls/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"微信后端服务TLS设置","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2021-12-29-wechat-tls\/"},"genre":"posts","keywords":"tips","wordCount":13,"url":"https:\/\/robbietree8.github.io\/posts\/2021-12-29-wechat-tls\/","datePublished":"2021-12-29T00:00:00+00:00","dateModified":"2021-12-29T00:00:00+00:00","description":""}</script></head>
+<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2022-01-18-nginx-504-in-k8s/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"nginx 504","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2022-01-18-nginx-504-in-k8s\/"},"genre":"posts","keywords":"tips","wordCount":8,"url":"https:\/\/robbietree8.github.io\/posts\/2022-01-18-nginx-504-in-k8s\/","datePublished":"2022-01-18T00:00:00+00:00","dateModified":"2022-01-18T00:00:00+00:00","description":""}</script></head>
 <body data-header-desktop data-header-mobile><script>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -71,14 +71,14 @@ k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
 <div class=post-all-meta>
 <nav class=breadcrumbs>
 <ol>
-<li><a href=/>主页 </a></li><li>微信后端服务TLS设置</li>
+<li><a href=/>主页 </a></li><li>nginx 504</li>
 </ol>
 </nav>
-<h1 class="single-title flipInX">微信后端服务TLS设置</h1><div class=post-meta>
+<h1 class="single-title flipInX">nginx 504</h1><div class=post-meta>
 <div class=post-meta-line><span class=post-meta-date>
-<i class="svg-icon icon-clock"></i><time class=timeago datetime=2021-12-29>2021-12-29</time>
+<i class="svg-icon icon-clock"></i><time class=timeago datetime=2022-01-18>2022-01-18</time>
 </span><span class=post-meta-words>
-<i class="svg-icon icon-pencil"></i>约 13 字
+<i class="svg-icon icon-pencil"></i>约 8 字
 </span>
 <span class=post-meta-reading>
 <i class="svg-icon icon-stopwatch"></i>预计阅读 1 分钟
@@ -99,14 +99,14 @@ k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
 <li><a href=#参考>参考</a></li>
 </ul>
 </nav></div>
-</div><h1 id=微信后端服务tls设置>微信后端服务TLS设置</h1>
-<p>微信对后台服务器的要求是<code>TLS 必须支持 1.2 及以上版本</code></p>
-<p>k8s上如何配置: <code>nginx-configuration</code>,<code>ssl-protocols</code>里配置成<code>TLSv1.2 TLSv1.3</code></p>
-<p>如何验证: 可在<a href=https://myssl.com/ target=_blank rel="noopener noreffer">myssl</a>网站上检查支持的协议版本。</p>
-<h2 id=参考>参考</h2>
+</div><h1 id=nginx-504>nginx 504</h1>
+<p>后端由nginx代理，处理时长超过60秒的时候，nginx侧报504错误，后修改nginx配置后，运行正常。</p>
+<p>关键配置是</p>
+<pre tabindex=0><code>nginx.ingress.kubernetes.io/proxy-send-timeout
+nginx.ingress.kubernetes.io/proxy-read-timeout
+</code></pre><h2 id=参考>参考</h2>
 <ul>
-<li><a href=https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html#1.%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE target=_blank rel="noopener noreffer">微信-服务器域名配置</a></li>
-<li><a href=https://kubernetes.github.io/ingress-nginx/user-guide/tls/ target=_blank rel="noopener noreffer">k8s-tls</a></li>
+<li><a href=https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts target=_blank rel="noopener noreffer">k8s-custom-timeouts</a></li>
 </ul>
 </div>
 <div class=post style=padding-top:0>
