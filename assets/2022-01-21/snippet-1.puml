@@ -1,0 +1,40 @@
+
+@startuml snippet-1
+component adapter as c1 {
+  package web
+  package wireless
+  package wap
+  web -[hidden]right-> wireless
+}
+component app as c2 {
+  package executor
+  package consumer
+  package scheduler
+  executor -[hidden]right-> scheduler
+}
+component domain as c3 {
+  package model
+  package ability
+  package gateway
+  model -[hidden]right-> gateway
+}
+component infrastructure as c4 {
+  package gatewayimpl
+  package mapper
+  package config
+  gatewayimpl -[hidden]right-> config
+}
+
+component client as c5 {
+  package api
+  package dto
+}
+
+c1 --down--> c2
+c2 -down-> c3
+c2 --down--> c4
+c4 ..up..> c3
+c2 -right-> c5
+@enduml
+
+
