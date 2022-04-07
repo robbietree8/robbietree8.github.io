@@ -1,190 +1,40 @@
-<!doctype html><html lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>using jmap in docker | </title><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content>
-<meta name=twitter:title content="using jmap in docker">
-<meta name=twitter:description content><meta name=Description content><meta property="og:title" content="using jmap in docker">
-<meta property="og:description" content="Docker里如何使用jmap 缘由 排查cpu 100%问题的时候，发现一个有趣的现象，使用openjdk:8-jdk-alpine作为基础镜像的应用，无法使用jmap, jstack等jdk的工具，但是使用openjdk:8-jdk作为基础镜像，却可以使用，即使应用的PID为1。
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>using jmap in docker |</title><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content><meta name=twitter:title content="using jmap in docker"><meta name=twitter:description content><meta name=Description content><meta property="og:title" content="using jmap in docker"><meta property="og:description" content="Docker里如何使用jmap 缘由 排查cpu 100%问题的时候，发现一个有趣的现象，使用openjdk:8-jdk-alpine作为基础镜像的应用，无法使用jmap, jstack等jdk的工具，但是使用openjdk:8-jdk作为基础镜像，却可以使用，即使应用的PID为1。
 测试  使用alpine镜像
- FROM openjdk:8-jdk-alpine COPY .">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://robbietree8.github.io/posts/2018-11-06-using-jmap-in-docker/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2018-11-06T00:00:00+00:00">
-<meta property="article:modified_time" content="2018-11-06T00:00:00+00:00">
-<meta name=application-name content="robbietree's blog">
-<meta name=apple-mobile-web-app-title content="robbietree's blog"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png>
-<link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2018-11-06-using-jmap-in-docker/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"using jmap in docker","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2018-11-06-using-jmap-in-docker\/"},"genre":"posts","keywords":"craftsman","wordCount":171,"url":"https:\/\/robbietree8.github.io\/posts\/2018-11-06-using-jmap-in-docker\/","datePublished":"2018-11-06T00:00:00+00:00","dateModified":"2018-11-06T00:00:00+00:00","description":""}</script></head>
-<body data-header-desktop data-header-mobile><script>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':'light'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'light'==='dark')&&document.body.setAttribute('theme','dark')</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/ title="robbietree's blog" class="header-logo logo-svg">robbietree's blog</a>
-</div>
-<div class=menu>
-<nav>
-<ul class=menu-inner><li>
-<a class=menu-item href=/posts/> Posts </a>
-</li><li>
-<a class=menu-item href=/tags/> Tags </a>
-</li><li>
-<a class=menu-item href=/categories/> Categories </a>
-</li></ul>
-</nav><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<span class="svg-icon icon-moon"></span>
-</a>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/ title="robbietree's blog" class=header-logo>robbietree's blog</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><nav>
-<ul><li>
-<a class=menu-item href=/posts/ title>Posts</a>
-</li><li>
-<a class=menu-item href=/tags/ title>Tags</a>
-</li><li>
-<a class=menu-item href=/categories/ title>Categories</a>
-</li></ul>
-</nav>
-<a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<span class="svg-icon icon-moon"></span>
-</a></div>
-</div>
-</header><main class=main>
-<div class="container content-article theme-classic"><div class=toc id=toc-auto>
-<div class=toc-title>目录</div>
-<div class=toc-content id=toc-content-auto></div>
-</div>
-<div class=header-post>
-<div class=post-title>
-<div class=post-all-meta>
-<nav class=breadcrumbs>
-<ol>
-<li><a href=/>主页 </a></li><li>using jmap in docker</li>
-</ol>
-</nav>
-<h1 class="single-title flipInX">using jmap in docker</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-meta-date>
-<i class="svg-icon icon-clock"></i><time class=timeago datetime=2018-11-06>2018-11-06</time>
-</span><span class=post-meta-words>
-<i class="svg-icon icon-pencil"></i>约 171 字
-</span>
-<span class=post-meta-reading>
-<i class="svg-icon icon-stopwatch"></i>预计阅读 1 分钟
-</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<article class="single toc-start">
-<div class="content-block content-block-first content-block-position">
-<div class=post><div class="details toc" id=toc-static data-kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#缘由>缘由</a></li>
-<li><a href=#测试>测试</a></li>
-<li><a href=#参考资料>参考资料</a></li>
-</ul>
-</nav></div>
-</div><h1 id=docker里如何使用jmap>Docker里如何使用jmap</h1>
-<h2 id=缘由>缘由</h2>
-<p>排查cpu 100%问题的时候，发现一个有趣的现象，使用openjdk:8-jdk-alpine作为基础镜像的应用，无法使用jmap, jstack等jdk的工具，但是使用openjdk:8-jdk作为基础镜像，却可以使用，即使应用的PID为1。</p>
-<h2 id=测试>测试</h2>
-<blockquote>
-<p>使用alpine镜像</p>
-</blockquote>
-<pre tabindex=0><code>FROM openjdk:8-jdk-alpine
+ FROM openjdk:8-jdk-alpine COPY ."><meta property="og:type" content="article"><meta property="og:url" content="https://robbietree8.github.io/posts/2018-11-06-using-jmap-in-docker/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-11-06T00:00:00+00:00"><meta property="article:modified_time" content="2018-11-06T00:00:00+00:00"><meta name=application-name content="robbietree's blog"><meta name=apple-mobile-web-app-title content="robbietree's blog"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://robbietree8.github.io/posts/2018-11-06-using-jmap-in-docker/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"using jmap in docker","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/robbietree8.github.io\/posts\/2018-11-06-using-jmap-in-docker\/"},"genre":"posts","keywords":"craftsman","wordCount":171,"url":"https:\/\/robbietree8.github.io\/posts\/2018-11-06-using-jmap-in-docker\/","datePublished":"2018-11-06T00:00:00+00:00","dateModified":"2018-11-06T00:00:00+00:00","description":""}</script></head><body data-header-desktop data-header-mobile><script>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"light"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"light"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="robbietree's blog" class="header-logo logo-svg">robbietree's blog</a></div><div class=menu><nav><ul class=menu-inner><li><a class=menu-item href=/posts/>Posts</a></li><li><a class=menu-item href=/tags/>Tags</a></li><li><a class=menu-item href=/categories/>Categories</a></li></ul></nav><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<span class="svg-icon icon-moon"></span></a></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="robbietree's blog" class=header-logo>robbietree's blog</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><nav><ul><li><a class=menu-item href=/posts/ title>Posts</a></li><li><a class=menu-item href=/tags/ title>Tags</a></li><li><a class=menu-item href=/categories/ title>Categories</a></li></ul></nav><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><span class="svg-icon icon-moon"></span></a></div></div></header><main class=main><div class="container content-article theme-classic"><div class=toc id=toc-auto><div class=toc-title>目录</div><div class=toc-content id=toc-content-auto></div></div><div class=header-post><div class=post-title><div class=post-all-meta><nav class=breadcrumbs><ol><li><a href=/>主页</a></li><li>using jmap in docker</li></ol></nav><h1 class="single-title flipInX">using jmap in docker</h1><div class=post-meta><div class=post-meta-line><span class=post-meta-date><i class="svg-icon icon-clock"></i><time class=timeago datetime=2018-11-06>2018-11-06</time>
+</span><span class=post-meta-words><i class="svg-icon icon-pencil"></i>约 171 字</span>
+<span class=post-meta-reading><i class="svg-icon icon-stopwatch"></i>预计阅读 1 分钟</span></div></div></div></div></div><article class="single toc-start"><div class="content-block content-block-first content-block-position"><div class=post><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#缘由>缘由</a></li><li><a href=#测试>测试</a></li><li><a href=#参考资料>参考资料</a></li></ul></nav></div></div><h1 id=docker里如何使用jmap>Docker里如何使用jmap</h1><h2 id=缘由>缘由</h2><p>排查cpu 100%问题的时候，发现一个有趣的现象，使用openjdk:8-jdk-alpine作为基础镜像的应用，无法使用jmap, jstack等jdk的工具，但是使用openjdk:8-jdk作为基础镜像，却可以使用，即使应用的PID为1。</p><h2 id=测试>测试</h2><blockquote><p>使用alpine镜像</p></blockquote><pre tabindex=0><code>FROM openjdk:8-jdk-alpine
 
 COPY ./target /opt/target
 WORKDIR /opt/target
-RUN find -type f -name &quot;*.jar&quot; | xargs -I{} mv {} app.jar
+RUN find -type f -name &#34;*.jar&#34; | xargs -I{} mv {} app.jar
 ENTRYPOINT exec java -Djava.security.egd=file:/dev/./urandom -jar app.jar
-</code></pre><p><strong>构建镜像</strong></p>
-<pre tabindex=0><code>docker build -t docker-jmap .
+</code></pre><p><strong>构建镜像</strong></p><pre tabindex=0><code>docker build -t docker-jmap .
 docker run --name docker-jmap-test --rm -it docker-jmap:latest
 docker exec -it docker-jmap-test sh
-</code></pre><p>
-<img loading=lazy decoding=async src=https://i.loli.net/2018/11/06/5be17b294bf56.jpg alt=https://i.loli.net/2018/11/06/5be17b294bf56.jpg title=5be17b294bf56.jpg></p>
-<p><code>使用alpine镜像不加--init参数的时候，无法使用jdk工具</code></p>
-<p><strong>加<code>--init</code></strong></p>
-<pre tabindex=0><code>docker run --name docker-jmap-test --rm --init -it docker-jmap:latest
-</code></pre><p>docker镜像里java应用的进程号不为1，可以使用<code>jstack</code></p>
-<p>
-<img loading=lazy decoding=async src=https://i.loli.net/2018/11/06/5be17b2b74f38.jpg alt=https://i.loli.net/2018/11/06/5be17b2b74f38.jpg title=5be17b2b74f38.jpg></p>
-<p><code>使用alpine镜像加上--init参数的时候，可以使用jdk工具</code></p>
-<blockquote>
-<p>使用完整镜像</p>
-</blockquote>
-<pre tabindex=0><code>FROM openjdk:8-jdk
+</code></pre><p><img loading=lazy decoding=async src=https://i.loli.net/2018/11/06/5be17b294bf56.jpg alt=https://i.loli.net/2018/11/06/5be17b294bf56.jpg title=5be17b294bf56.jpg></p><p><code>使用alpine镜像不加--init参数的时候，无法使用jdk工具</code></p><p><strong>加<code>--init</code></strong></p><pre tabindex=0><code>docker run --name docker-jmap-test --rm --init -it docker-jmap:latest
+</code></pre><p>docker镜像里java应用的进程号不为1，可以使用<code>jstack</code></p><p><img loading=lazy decoding=async src=https://i.loli.net/2018/11/06/5be17b2b74f38.jpg alt=https://i.loli.net/2018/11/06/5be17b2b74f38.jpg title=5be17b2b74f38.jpg></p><p><code>使用alpine镜像加上--init参数的时候，可以使用jdk工具</code></p><blockquote><p>使用完整镜像</p></blockquote><pre tabindex=0><code>FROM openjdk:8-jdk
 
 COPY ./target /opt/target
 WORKDIR /opt/target
-RUN find -type f -name &quot;*.jar&quot; | xargs -I{} mv {} app.jar
+RUN find -type f -name &#34;*.jar&#34; | xargs -I{} mv {} app.jar
 ENTRYPOINT exec java -Djava.security.egd=file:/dev/./urandom -jar app.jar
-</code></pre><p><strong>构建镜像</strong></p>
-<pre tabindex=0><code>docker build -t docker-jmap-full .
+</code></pre><p><strong>构建镜像</strong></p><pre tabindex=0><code>docker build -t docker-jmap-full .
 docker run --name docker-jmap-test --rm -it docker-jmap-full:latest
 docker exec -it docker-jmap-test sh
-</code></pre><p>
-<img loading=lazy decoding=async src=https://i.loli.net/2018/11/06/5be17b2b39312.jpg alt=https://i.loli.net/2018/11/06/5be17b2b39312.jpg title=5be17b2b39312.jpg></p>
-<p><code>使用完整镜像即使不加--init参数的时候，也可以使用jdk工具</code></p>
-<blockquote>
-<p>使用<code>tini</code></p>
-</blockquote>
-<p>如果是在<code>k8s</code>里部署应用的话，<code>--init</code>参数无法使用，可以尝试用<code>tini</code>来解决</p>
-<pre tabindex=0><code>FROM openjdk:8-jdk-alpine
+</code></pre><p><img loading=lazy decoding=async src=https://i.loli.net/2018/11/06/5be17b2b39312.jpg alt=https://i.loli.net/2018/11/06/5be17b2b39312.jpg title=5be17b2b39312.jpg></p><p><code>使用完整镜像即使不加--init参数的时候，也可以使用jdk工具</code></p><blockquote><p>使用<code>tini</code></p></blockquote><p>如果是在<code>k8s</code>里部署应用的话，<code>--init</code>参数无法使用，可以尝试用<code>tini</code>来解决</p><pre tabindex=0><code>FROM openjdk:8-jdk-alpine
 
-ENV JAVA_OPTS=&quot;-Xms2g -Xmx4g&quot;
+ENV JAVA_OPTS=&#34;-Xms2g -Xmx4g&#34;
 COPY ./target /opt/target
 WORKDIR /opt/target
-RUN find -type f -name &quot;*.jar&quot; | xargs -I{} mv {} app.jar
+RUN find -type f -name &#34;*.jar&#34; | xargs -I{} mv {} app.jar
 
 # Add Tini
 RUN apk add --no-cache tini
-ENTRYPOINT [&quot;/sbin/tini&quot;, &quot;-s&quot;, &quot;--&quot;]
+ENTRYPOINT [&#34;/sbin/tini&#34;, &#34;-s&#34;, &#34;--&#34;]
 CMD java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar app.jar
-</code></pre><p><strong>构建镜像</strong></p>
-<pre tabindex=0><code>docker build -t docker-jmap-full .
+</code></pre><p><strong>构建镜像</strong></p><pre tabindex=0><code>docker build -t docker-jmap-full .
 docker run --name docker-jmap-test --rm -it docker-jmap-full:latest
 docker exec -it docker-jmap-test sh
-</code></pre><p>
-<img loading=lazy decoding=async src=https://i.loli.net/2018/11/08/5be3fd03695a0.jpg alt=https://i.loli.net/2018/11/08/5be3fd03695a0.jpg title=5be3fd03695a0.jpg></p>
-<h2 id=参考资料>参考资料</h2>
-<p><a href=http://yunke.science/2018/04/09/Tini-command/ target=_blank rel="noopener noreffer">Tini - 一个小而有效的容器初始化命令</a></p>
-</div>
-<div class=post style=padding-top:0>
-<div class=post-share></div>
-<div class=post-tags><a href=/tags/craftsman/ class=tag>craftsman</a></div></div>
-</div>
-<div id=toc-final></div>
-</article><div class="page single comments content-block-position"><div id=comments><div id=utterances></div><noscript>
-Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.
-</noscript></div></div></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.92.0">Hugo</a> 强力驱动 | 主题 - <a href="https://ublogger.netlify.app/?utm_source=https://robbietree8.github.io/&utm_medium=footer&utm_campaign=config&utm_term=2.0.1" target=_blank title="uBlogger 2.0.1">uBlogger</a>
-</div><div class=footer-line><i class="svg-icon icon-copyright"></i><span>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="svg-icon icon-arrow-up"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="svg-icon icon-comments-fixed"></i>
-</a>
-</div><script src=/lib/smooth-scroll/smooth-scroll.min.js></script><script src=/lib/clipboard/clipboard.min.js></script><script>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"robbietree8/blog-comments"}}}</script><script src=/js/theme.min.js></script><script>(function(a,e,f,g,b,c,d){a[b]=a[b]||function(){(a[b].a=a[b].a||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym"),ym("75049342","init",{clickmap:!0,trackLinks:!0,accurateTrackBounce:!0,webvisor:null})</script>
-<noscript><div><img src=https://mc.yandex.ru/watch/75049342 style=position:absolute;left:-9999px alt></div></noscript></body>
-</html>
+</code></pre><p><img loading=lazy decoding=async src=https://i.loli.net/2018/11/08/5be3fd03695a0.jpg alt=https://i.loli.net/2018/11/08/5be3fd03695a0.jpg title=5be3fd03695a0.jpg></p><h2 id=参考资料>参考资料</h2><p><a href=http://yunke.science/2018/04/09/Tini-command/ target=_blank rel="noopener noreffer">Tini - 一个小而有效的容器初始化命令</a></p></div><div class=post style=padding-top:0><div class=post-share></div><div class=post-tags><a href=/tags/craftsman/ class=tag>craftsman</a></div></div></div><div id=toc-final></div></article><div class="page single comments content-block-position"><div id=comments><div id=utterances></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>Utterances</a>.</noscript></div></div></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.96.0">Hugo</a> 强力驱动 | 主题 - <a href="https://ublogger.netlify.app/?utm_source=https://robbietree8.github.io/&utm_medium=footer&utm_campaign=config&utm_term=2.0.1" target=_blank title="uBlogger 2.0.1">uBlogger</a></div><div class=footer-line><i class="svg-icon icon-copyright"></i><span>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="svg-icon icon-arrow-up"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="svg-icon icon-comments-fixed"></i></a></div><script src=/lib/smooth-scroll/smooth-scroll.min.js></script><script src=/lib/clipboard/clipboard.min.js></script><script>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"robbietree8/blog-comments"}}}</script><script src=/js/theme.min.js></script><script>(function(e,o,i,a,t,n,s){e[t]=e[t]||function(){(e[t].a=e[t].a||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym"),ym("75049342","init",{clickmap:!0,trackLinks:!0,accurateTrackBounce:!0,webvisor:null})</script><noscript><div><img src=https://mc.yandex.ru/watch/75049342 style=position:absolute;left:-9999px alt></div></noscript></body></html>
