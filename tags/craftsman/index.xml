@@ -15,4 +15,5 @@ mysqldump -uroot -p -hlocalhost -P3306 db &amp;gt; /var/lib/mysql/db.sql 数据�
 时序数据库的特点： 持续写入数据量大，数据和时间相关。读取操作相对较少，且通常读取的是一段时间范围内的数据。
 存储 LSMTree
 组件
-目录结构</description></item></channel></rss>
+目录结构
+|-- data | |-- NOAA_water_database | | |-- autogen | | |-- 3 | | | |-- 000000001-000000001.</description></item></channel></rss>
