@@ -1,0 +1,8 @@
+@startuml flow
+storage "jmeter" <<k8s-job>> as J
+storage "influxdb2" as I
+storage "grafana" as G
+
+J --> I : send realtime data
+G -> I : using as datasource
+@enduml
