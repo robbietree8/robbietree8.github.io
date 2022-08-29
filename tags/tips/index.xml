@@ -1,11 +1,11 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>tips - 标签 - robbietree's blog</title><link>https://robbietree8.github.io/tags/tips/</link><description>tips - 标签 - robbietree's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 29 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://robbietree8.github.io/tags/tips/" rel="self" type="application/rss+xml"/><item><title>performance test using k8s</title><link>https://robbietree8.github.io/posts/2022-08-29-pts-using-k8s/</link><pubDate>Mon, 29 Aug 2022 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2022-08-29-pts-using-k8s/</guid><description>在k8s里做性能测试 整体架构 其中:
 jmeter-k8s-job
 以docker-jmeter为基础镜像，运行jmx脚本即可
+使用了这个插件
 influxdb2
 使用的是2.4.0版本，按照官方文档部署即可
 grafana
-使用的是9.1.1版本，按照官方文档部署即可
-两个开源的dashboards见以下。</description></item><item><title>docker tips</title><link>https://robbietree8.github.io/posts/2022-06-24-docker-tips/</link><pubDate>Fri, 24 Jun 2022 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2022-06-24-docker-tips/</guid><description>tips docker容器内怎么连接本机数据库 使用host.docker.internal</description></item><item><title>nginx 504</title><link>https://robbietree8.github.io/posts/2022-01-18-nginx-504-in-k8s/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2022-01-18-nginx-504-in-k8s/</guid><description>nginx 504 后端由nginx代理，处理时长超过60秒的时候，nginx侧报504错误，后修改nginx配置后，运行正常。
+使用的是9.1.1版本，按照官方文档部署即可</description></item><item><title>docker tips</title><link>https://robbietree8.github.io/posts/2022-06-24-docker-tips/</link><pubDate>Fri, 24 Jun 2022 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2022-06-24-docker-tips/</guid><description>tips docker容器内怎么连接本机数据库 使用host.docker.internal</description></item><item><title>nginx 504</title><link>https://robbietree8.github.io/posts/2022-01-18-nginx-504-in-k8s/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2022-01-18-nginx-504-in-k8s/</guid><description>nginx 504 后端由nginx代理，处理时长超过60秒的时候，nginx侧报504错误，后修改nginx配置后，运行正常。
 关键配置是
 nginx.ingress.kubernetes.io/proxy-send-timeout nginx.ingress.kubernetes.io/proxy-read-timeout 参考 k8s-custom-timeouts</description></item><item><title>微信后端服务TLS设置</title><link>https://robbietree8.github.io/posts/2021-12-29-wechat-tls/</link><pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2021-12-29-wechat-tls/</guid><description>微信后端服务TLS设置 微信对后台服务器的要求是TLS 必须支持 1.2 及以上版本
 k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
