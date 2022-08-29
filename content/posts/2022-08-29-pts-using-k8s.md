@@ -18,6 +18,8 @@ tags: ["tips"]
 
 以`docker-jmeter`为基础镜像，运行`jmx`脚本即可
 
+使用了[这个插件](https://github.com/mderevyankoaqa/jmeter-influxdb2-listener-plugin)
+
 `influxdb2`
 
 使用的是`2.4.0`版本，按照官方文档部署即可
