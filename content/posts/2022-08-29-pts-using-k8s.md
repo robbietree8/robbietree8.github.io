@@ -10,7 +10,7 @@ tags: ["tips"]
 
 ## 整体架构
 
-![flow](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2021-08-29/flow.puml)
+![flow](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2022-08-29/flow.puml)
 
 其中:
 
