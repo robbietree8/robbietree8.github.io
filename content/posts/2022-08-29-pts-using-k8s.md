@@ -28,6 +28,12 @@ tags: ["tips"]
 
 两个开源的dashboards见以下。
 
+## 运行效果
+
+![g-1](https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2022-08-29/g-1.jpg)
+
+![g-2](https://raw.githubusercontent.com/robbietree8/robbietree8.github.io/main/assets/2022-08-29/g-2.jpg)
+
 
 ## 参考
 
