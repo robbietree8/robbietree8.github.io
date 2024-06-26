@@ -1,4 +1,5 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>所有文章 - robbietree's blog</title><link>https://robbietree8.github.io/posts/</link><description>所有文章 | robbietree's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 29 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://robbietree8.github.io/posts/" rel="self" type="application/rss+xml"/><item><title>performance test using k8s</title><link>https://robbietree8.github.io/posts/2022-08-29-pts-using-k8s/</link><pubDate>Mon, 29 Aug 2022 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2022-08-29-pts-using-k8s/</guid><description>在k8s里做性能测试 整体架构 其中:
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>所有文章 - robbietree's blog</title><link>https://robbietree8.github.io/posts/</link><description>所有文章 | robbietree's blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 26 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://robbietree8.github.io/posts/" rel="self" type="application/rss+xml"/><item><title>利用esp32-box-3，实现摄像头实时流</title><link>https://robbietree8.github.io/posts/2024-06-26-esp32-box-3-camera-streaming/</link><pubDate>Wed, 26 Jun 2024 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2024-06-26-esp32-box-3-camera-streaming/</guid><description>如何利用esp32-box-3，实现摄像头实时流 firmware 摄像头捕捉到一帧的数据后，拆包后通过 udp 传送到服务端
+udp receiving 接收 udp 的分包数据，按照字节头判断是否为图片，合并之后保存成 bytearray</description></item><item><title>performance test using k8s</title><link>https://robbietree8.github.io/posts/2022-08-29-pts-using-k8s/</link><pubDate>Mon, 29 Aug 2022 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2022-08-29-pts-using-k8s/</guid><description>在k8s里做性能测试 整体架构 其中:
 jmeter-k8s-job
 以docker-jmeter为基础镜像，运行jmx脚本即可
 使用了这个插件
@@ -16,9 +17,4 @@ k8s上如何配置: nginx-configuration,ssl-protocols里配置成TLSv1.2 TLSv1.3
 后端 基础技术栈: spring boot, mysql
 业务框架: todo</description></item><item><title>swagger behind proxy</title><link>https://robbietree8.github.io/posts/2021-12-06-openapi-under-proxy/</link><pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2021-12-06-openapi-under-proxy/</guid><description>swagger behind proxy 出发点 在某些情况下，我们的后端服务是隐藏在网关后面，网关通过路径路由到具体的后端服务，比如/abc/ -&amp;gt; http://backend:8080
 这会导致访问swagger端点的时候，路径带不过去，进而通过swagger访问不到后端
-如何解决 配置ui地址 springdoc.</description></item><item><title>微信公众号开发记录</title><link>https://robbietree8.github.io/posts/2021-05-12-woa/</link><pubDate>Wed, 12 May 2021 00:00:00 +0000</pubDate><author>作者</author><guid>https://robbietree8.github.io/posts/2021-05-12-woa/</guid><description>微信公众号开发记录 核心流程 微信端配置接口
-参考 me.chanjar.weixin.mp.api.WxMpService#checkSignature
-接收微信推送消息
-参考 me.chanjar.weixin.mp.api.WxMpMessageRouter
-code换session
-参考me.chanjar.weixin.mp.api.WxMpService#getOAuth2Service().getAccessToken(code)</description></item></channel></rss>
+如何解决 配置ui地址 springdoc.</description></item></channel></rss>
