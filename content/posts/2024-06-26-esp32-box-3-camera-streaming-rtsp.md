@@ -12,7 +12,7 @@ rtmp方案里，video codec基本要求是H.264，配置s3的编码器为H.264�
 
 又开始尝试rtsp方案，服务器尝试过zlmediakit，但是它对s3的rtsp session处理有点问题，导致rtsp握手就失败了，没办法，只能使用 easydarwin。
 
-使用easydarwin也有一个坑，用 vlc 拉流，非常卡顿，搜索一圈后，用了IINA，问题解决。
+使用easydarwin也有一个坑，用 vlc 拉流，非常卡顿，搜索一圈后，用了IINA，问题解决，ios 端可以使用`Outplayer`软件
 不过 easydarwin 太久没有维护了，谨慎使用。
 
 
