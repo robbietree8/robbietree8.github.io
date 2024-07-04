@@ -36,5 +36,5 @@ ffplay -i rtsp://ip:554/1
 
 ## reference
 
-- [adf例成](https://github.com/espressif/esp-adf/tree/master/examples/protocols/esp-rtsp)
+- [adf例程](https://github.com/espressif/esp-adf/tree/master/examples/protocols/esp-rtsp)
 - [服务端代码](https://gist.github.com/robbietree8/b3438900dbf3faca7f68c6f800b90caa)
