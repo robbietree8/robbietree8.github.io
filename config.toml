@@ -28,8 +28,8 @@ summaryLength = 10
   [params.analytics]
     enable = true
 
-    [params.analytics.yandex]
-      id = "75049342"
+    [params.analytics.clarity]
+      id = "nftpm0plno"
 
 [menu]
   [[menu.main]]
