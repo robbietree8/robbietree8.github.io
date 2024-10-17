@@ -26,3 +26,12 @@ tags: ["craftsman"]
 
 点击Run Collection，选择执行次数(Iterations)和延迟(Delay)。
 Data file上传 csv 文件，csv 文件里一列对应一个变量，变量名在第一行
+
+## 参考
+
+__kimi的回答__
+
+![1.jpg](https://s2.loli.net/2024/10/17/R6FewNWUXhsQoSd.jpg)
+
+__google的回答__
+![2.jpg](https://s2.loli.net/2024/10/17/w8RBjKUGEYpXzSo.jpg)
